@@ -12,6 +12,11 @@ import './charts/ChartjsConfig';
 // Import pages
 import Dashboard from './pages/Dashboard/Dashboard';
 import Users from './pages/Users/Users';
+import Payments from './pages/Finances/Payments';
+import Revenue from './pages/Finances/Revenue';
+
+
+
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -29,6 +34,8 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Dashboard sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>} />
         <Route path ='/users' element={<Users  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
+        <Route path ='/finance/payment' element={<Payments  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
+        <Route path ='/finance/revenue' element={<Revenue  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
       </Routes>
     </>
   );
