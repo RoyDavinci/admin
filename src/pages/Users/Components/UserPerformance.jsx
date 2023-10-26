@@ -18,7 +18,7 @@ const UserPerformance = () => {
                     <BsThreeDotsVertical/>
                 </div>
 
-                <div className="signUp-bottm space-y-5 h-60 max-h-60 overflow-y-auto">
+                <div className="signUp-bottm space-y-5 h-60 max-h-60 overflow-y-auto no-scrollbar">
                     {
                         ["Barry Chagur", "MooHub", "Technologies", "MooHub Tech","Barry Chagur", "MooHub", "Technologies", "MooHub Tech"].map((users, index)=>(
                             <div className="users-outer flex gap-x-3 items-center" key={index}>
