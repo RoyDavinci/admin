@@ -45,8 +45,9 @@ function Dashboard() {
             {/* Dashboard actions */}
             <div className="sm:flex sm:justify-between sm:items-center mb-8">
 
-              {/* Left: Avatars */}
-              <DashboardAvatars />
+              {/* Left: Avatars
+              <DashboardAvatars />  */}
+              <div></div>
 
               {/* Right: Actions */}
               <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
@@ -68,12 +69,12 @@ function Dashboard() {
             {/* Cards */}
             <div className="grid grid-cols-12 gap-6">
 
-              {/* Line chart (Acme Plus) */}
+              {/* Line chart (Acme Plus) 
               <DashboardCard01 />
-              {/* Line chart (Acme Advanced) */}
+              {/* Line chart (Acme Advanced) 
               <DashboardCard02 />
-              {/* Line chart (Acme Professional) */}
-              <DashboardCard03 />
+              {/* Line chart (Acme Professional) 
+              <DashboardCard03 /> */}
               {/* Bar chart (Direct vs Indirect) */}
               <DashboardCard04 />
               {/* Line chart (Real Time Value) */}
