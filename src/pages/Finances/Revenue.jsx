@@ -14,7 +14,7 @@ const Revenue = ({sidebarOpen,setSidebarOpen}) => {
             <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
             <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-[#FCFCFC]">
-                <Header/>
+                <Header page={"Finances/Revenue"}/>
                 <div className="w-full space-y-14">
                     <RevenueTop/>
                     <RPercentageRead/>

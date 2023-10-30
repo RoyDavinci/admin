@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Sidebar from '../../partials/Sidebar';
 import Header from '../../partials/Header';
@@ -55,6 +55,38 @@ function Dashboard({sidebarOpen, setSidebarOpen}) {
   
   ]
 
+  // const currentColor = useEffect(()=>{
+  //   if(level === "Safe"){
+  //     return '#51D323'
+  //   }else if(level === 'Panic'){
+  //     return '#FF7B00'
+  //   }else{
+  //     return '#E22A26'
+  //   }
+  // },[level])
+
+  const datasets =[
+      // Light blue bars
+      {
+        label: 'Direct',
+        data: [
+          800, 1600, 900, 1300, 1950, 1700,
+        ],
+        backgroundColor:level === 'Safe'? '#51D323': level === 'Panic'? '#FF7B00':'#E22A26',
+        barPercentage: 0.66,
+        categoryPercentage: 0.66,
+      },
+      // Blue bars
+      {
+        label: 'Indirect',
+        data: [
+          4900, 2600, 5350, 4800, 5200, 4800,
+        ],
+        backgroundColor: level === 'Safe'? '#51D323': level === 'Panic'? '#FF7B00':'#E22A26',
+        barPercentage: 0.66,
+        categoryPercentage: 0.66,
+      },
+    ]
 
   return (
     <div className="flex h-screen overflow-hidden ">
@@ -66,7 +98,7 @@ function Dashboard({sidebarOpen, setSidebarOpen}) {
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
 
         {/*  Site header */}
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} page={"Dashboard"}/>
 
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto space-y-10 bg-white">
@@ -116,7 +148,7 @@ function Dashboard({sidebarOpen, setSidebarOpen}) {
                 </div>
 
                 <div className="bar-chart py-7">
-                  <DashboardCard04 />
+                  <DashboardCard04 datasets={datasets}/>
                 </div>
               </div>
 
