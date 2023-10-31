@@ -37,56 +37,51 @@ function Dashboard({sidebarOpen, setSidebarOpen}) {
     {
       name:'Safe',
       value:2550,
-      color:'#51D323',
+      color:['#51D323','#E4E8EF'],
       repValues:[2550,3500],
     },
     {
       name:'Panic',
       value:938,
-      color:'#FF7B00',
+      color:['#FF7B00', '#E4E8EF'],
       repValues:[938,3500],
     },
     {
       name:'Danger',
       value:12,
-      color:'#E22A26',
+      color:['#E22A26', '#E4E8EF'],
       repValues:[12,3500],
     },
   
   ]
 
-  // const currentColor = useEffect(()=>{
-  //   if(level === "Safe"){
-  //     return '#51D323'
-  //   }else if(level === 'Panic'){
-  //     return '#FF7B00'
-  //   }else{
-  //     return '#E22A26'
-  //   }
-  // },[level])
 
-  const datasets =[
-      // Light blue bars
+    
+    const datasets= [
       {
         label: 'Direct',
         data: [
           800, 1600, 900, 1300, 1950, 1700,
         ],
-        backgroundColor:level === 'Safe'? '#51D323': level === 'Panic'? '#FF7B00':'#E22A26',
+        backgroundColor:'#51D323',
         barPercentage: 0.66,
         categoryPercentage: 0.66,
       },
-      // Blue bars
       {
         label: 'Indirect',
         data: [
           4900, 2600, 5350, 4800, 5200, 4800,
         ],
-        backgroundColor: level === 'Safe'? '#51D323': level === 'Panic'? '#FF7B00':'#E22A26',
+        backgroundColor: '#51D323',
         barPercentage: 0.66,
         categoryPercentage: 0.66,
       },
     ]
+   
+
+
+
+
 
   return (
     <div className="flex h-screen overflow-hidden ">
@@ -114,7 +109,7 @@ function Dashboard({sidebarOpen, setSidebarOpen}) {
                     </div>
                     {/* Pie Chart */}
                     <div className="info-pie h-full">
-                      <DashboardCard06 color={info.color} repValues={info.repValues} label={info.name}/>
+                      <DashboardCard06 color={info.color} repValues={info.repValues} label={info.name} height={70}/>
                     </div>
                   </div>
                 ))}

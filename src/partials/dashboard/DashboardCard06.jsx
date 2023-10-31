@@ -4,27 +4,22 @@ import DoughnutChart from '../../charts/DoughnutChart';
 // Import utilities
 import { tailwindConfig } from '../../utils/Utils';
 
-function DashboardCard06({color, repValues, label}) {
+function DashboardCard06({color, repValues, label, height}) {
 
   const chartData = {
     datasets: [
       {
         label: label,
         data: repValues,
-        backgroundColor: [
-          color,
-          '#E4E8EF'
-        ],
-
+        backgroundColor: color,
         borderWidth: 0,
       },
     ],
   };
 
   return (
-    <div>
-
-      <DoughnutChart data={chartData} width={70} height={70} />
+    <div >
+      <DoughnutChart data={chartData} width={'100%'} height={height} />
     </div>
   );
 }

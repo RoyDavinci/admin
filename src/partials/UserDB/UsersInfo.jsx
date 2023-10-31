@@ -19,7 +19,7 @@ const UsersInfo = ({Info}) => {
             <BsThreeDotsVertical/>
         </div>
         <div className="users-info-filter flex  items-center px-7 w-full">
-            <h3 className='w-2/6 text-base font-medium text-black'>{Info}</h3>
+            <h3 className='w-2/6 text-base font-medium text-black uppercase'>{Info}</h3>
 
             <div className='flex justify-evenly gap-x-5 items-center w-full text-black'>
                 <div className='w-[35%] filter-outer px-0'>

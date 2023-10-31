@@ -20,7 +20,7 @@ const Users = ({ sidebarOpen,setSidebarOpen}) => {
                 <div className="w-full space-y-10">    
                     <UserPerformance/>
                     <UserReadings/>
-                    <UsersInfo Info={'Report'}/>
+                    <UsersInfo Info={'Logged Users'}/>
                 </div>
                 
             </div>
