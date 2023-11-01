@@ -7,15 +7,15 @@ import RPercentageRead from './Components/RPercentageRead'
 
 
 
-const Revenue = ({sidebarOpen,setSidebarOpen}) => {
+const Revenue = () => {
   return (
     <div>
         <div className="flex h-screen overflow-hidden">
-            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+            <Sidebar  />
 
             <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-[#FCFCFC]">
                 <Header page={"Finances/Revenue"}/>
-                <div className="w-full space-y-14">
+                <div className="w-full space-y-14 mb-10">
                     <RevenueTop/>
                     <RPercentageRead/>
                     <RBttmGraph/>

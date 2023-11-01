@@ -6,7 +6,7 @@ import Header from '../../partials/Header'
 import Sidebar from '../../partials/Sidebar'
 import SalesHeader from './Components/SalesHeader'
 
-const Sales = ({sidebarOpen,setSidebarOpen}) => {
+const Sales = () => {
     const datasets= [
         {
           label: 'Direct',
@@ -53,7 +53,7 @@ const Sales = ({sidebarOpen,setSidebarOpen}) => {
   return (
     <div>
         <div className="flex h-screen overflow-hidden">
-            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+            <Sidebar  />
 
             <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-[#FCFCFC]">
                 <Header page={"Finances/Sales"}/>

@@ -1,9 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { sideBarContext } from "../Contexts/SideBContext";
 import "../css/sidebar.css";
 import SidebarLinkGroup from "./SidebarLinkGroup";
 
-function Sidebar({ sidebarOpen, setSidebarOpen }) {
+function Sidebar() {
+  const {sidebarOpen, setSidebarOpen} = useContext(sideBarContext)
+
+
   const location = useLocation();
   const { pathname } = location;
 

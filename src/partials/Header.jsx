@@ -9,7 +9,7 @@ import {BsBell,BsFillCalendarWeekFill} from 'react-icons/bs'
 import {FaUser} from 'react-icons/fa'
 import DatePicker from 'react-flatpickr';
 
-function Header({ sidebarOpen, setSidebarOpen, page }) {
+function Header({ page }) {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
   const date = new Date();
   const exactMonth = date.getMonth()+1;

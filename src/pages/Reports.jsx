@@ -3,10 +3,10 @@ import Header from '../partials/Header'
 import Sidebar from '../partials/Sidebar'
 import UsersInfo from '../partials/UserDB/UsersInfo'
 
-const Reports = ({setSidebarOpen, sidebarOpen}) => {
+const Reports = () => {
   return (
     <div className="flex h-screen overflow-hidden">
-            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+            <Sidebar  />
 
             <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-[#FCFCFC]">
                 <Header page={"Reports"}/>

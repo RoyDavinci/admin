@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Routes,
   Route,
@@ -16,12 +16,13 @@ import Payments from './pages/Finances/Payments';
 import Revenue from './pages/Finances/Revenue';
 import Sales from './pages/Finances/Sales';
 import Reports from './pages/Reports';
+import SideBContext from './Contexts/SideBContext';
+import DataContext from './Contexts/DataContext';
 
 
 
 
 function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const location = useLocation();
 
@@ -32,16 +33,20 @@ function App() {
   }, [location.pathname]); // triggered on route change
 
   return (
-    <>
-      <Routes>
-        <Route exact path="/" element={<Dashboard sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>} />
-        <Route path ='/users' element={<Users  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
-        <Route path ='/finance/payment' element={<Payments  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
-        <Route path ='/finance/revenue' element={<Revenue  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
-        <Route path ='/finance/sales' element={<Sales sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
-        <Route path ='/reports' element={<Reports sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
-      </Routes>
-    </>
+    <DataContext>
+      <SideBContext>
+        <>
+          <Routes>
+            <Route exact path="/" element={<Dashboard />} />
+            <Route path ='/users' element={<Users  />}/>
+            <Route path ='/finance/payment' element={<Payments  />}/>
+            <Route path ='/finance/revenue' element={<Revenue  />}/>
+            <Route path ='/finance/sales' element={<Sales />}/>
+            <Route path ='/reports' element={<Reports />}/>
+          </Routes>
+        </>
+      </SideBContext>
+    </DataContext>
   );
 }
 
