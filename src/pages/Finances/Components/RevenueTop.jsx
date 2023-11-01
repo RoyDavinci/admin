@@ -4,6 +4,13 @@ import {BsDot} from 'react-icons/bs'
 
 
 const RevenueTop = () => {
+    const Rtype = [{
+
+    },
+    ];
+
+
+
   return (
     <div className='flex justify-between items-center px-14 pt-5'>
         {

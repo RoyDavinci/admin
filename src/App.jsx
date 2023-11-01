@@ -14,6 +14,8 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Users from './pages/Users/Users';
 import Payments from './pages/Finances/Payments';
 import Revenue from './pages/Finances/Revenue';
+import Sales from './pages/Finances/Sales';
+import Reports from './pages/Reports';
 
 
 
@@ -36,6 +38,8 @@ function App() {
         <Route path ='/users' element={<Users  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
         <Route path ='/finance/payment' element={<Payments  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
         <Route path ='/finance/revenue' element={<Revenue  sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
+        <Route path ='/finance/sales' element={<Sales sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
+        <Route path ='/reports' element={<Reports sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen}/>}/>
       </Routes>
     </>
   );

@@ -1,17 +1,30 @@
-import React from 'react'
-import {BsFillCaretDownFill,BsSearch} from 'react-icons/bs'
+import React, { useState } from 'react'
+import {BsFillCaretDownFill,BsSearch,BsThreeDotsVertical} from 'react-icons/bs'
 import {PiCaretUpDownFill} from 'react-icons/pi'
+import {IoMdRefresh} from 'react-icons/io'
+import DatePicker from 'react-flatpickr'
 
 const UsersInfo = ({Info}) => {
+    const [check, setCheck] = useState(false)
+
+    const handleChange =(e)=>{
+        setCheck(!check)
+    }
+
   return (
-    <div className='users-info-outer pb-10'>
-        <div className="users-info-filter flex  items-center px-7">
-            <h3 className='w-2/6 text-base font-medium text-black'>{Info}</h3>
+    <div className='users-info-outer pb-14'>
+        <div className='details-control text-black flex gap-x-7 mb-7 ml-[4.8%] items-center'>
+            <input type="checkbox" name="" id="" className='accent-black border-black outline-none' onClick={()=>setCheck(!check)}/>
+            <IoMdRefresh size={20} onClick={()=> window.location.reload(false)}/>
+            <BsThreeDotsVertical/>
+        </div>
+        <div className="users-info-filter flex  items-center px-7 w-full">
+            <h3 className='w-2/6 text-base font-medium text-black uppercase'>{Info}</h3>
 
             <div className='flex justify-evenly gap-x-5 items-center w-full text-black'>
                 <div className='w-[35%] filter-outer px-0'>
                     <BsSearch className='absolute top-[50%] translate-y-[-50%] left-2'/>
-                    <input type="text" className='w-full border-none outline-none relative h-full bg-transparent pl-7 ' placeholder='Search'/>
+                    <input type="text" className='w-full border-none outline-none relative h-full bg-transparent pl-7 ' placeholder='Search' />
                 </div>
                 
                 <div className='filter-outer px-0 border'>
@@ -24,9 +37,9 @@ const UsersInfo = ({Info}) => {
                 </div>
                 
                 
-                <div className='filter-outer'>
-                    <h3>Date</h3>
-                    <BsFillCaretDownFill/>
+                <div className='filter-outer p-0 relative cursor-pointer'>
+                    <DatePicker className='!border-none !outline-none !accent-[#8f8f8f21] cursor-pointer w-full' placeholder='Date'/>
+                    <BsFillCaretDownFill className='absolute top-[50%] translate-y-[-50%] right-3'/>
                 </div>
             </div>
             
@@ -56,7 +69,7 @@ const UsersInfo = ({Info}) => {
                     <div className=' h-12 flex items-center justify-between gap-x-5 w-full'>
 
                         <div className='flex justify-center items-center w-[10%]'>
-                            <input type="checkbox" name="" id="" className='accent-black border-black outline-none'/>
+                            <input type="checkbox" name="" id="" className='accent-black border-black outline-none' onChange={handleChange} checked={check}/>
                         </div>
 
                         <div className='flex justify-start w-full items-center gap-x-10'>
@@ -71,7 +84,7 @@ const UsersInfo = ({Info}) => {
                     <div className=' h-12 flex items-center justify-between gap-x-5 w-full'>
 
                         <div className='flex justify-center items-center w-[10%]'>
-                            <input type="checkbox" name="" id="" className='accent-black border-black outline-none'/>
+                            <input type="checkbox" name="" id="" className='accent-black border-black outline-none' onChange={handleChange} checked={check}/>
                         </div>
 
                         <div className='flex justify-start w-full items-center gap-x-10'>
@@ -86,7 +99,7 @@ const UsersInfo = ({Info}) => {
                     <div className=' h-12 flex items-center justify-between gap-x-5 w-full'>
 
                         <div className='flex justify-center items-center w-[10%]'>
-                            <input type="checkbox" name="" id="" className='accent-black border-black outline-none'/>
+                            <input type="checkbox" name="" id="" className='accent-black border-black outline-none' onChange={handleChange} checked={check}/>
                         </div>
 
                         <div className='flex justify-start w-full items-center gap-x-10'>

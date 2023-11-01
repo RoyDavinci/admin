@@ -12,7 +12,7 @@ const Payments = ({sidebarOpen,setSidebarOpen}) => {
             <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
             <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-[#FCFCFC]">
-                <Header/>
+                <Header page={"Finances/Payments"}/>
                 <div className="w-full space-y-20">
                     <PaymentGraph/>
                     <UsersInfo Info={'SUBSCRIPTION'}/>
