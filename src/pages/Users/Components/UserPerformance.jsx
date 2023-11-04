@@ -1,14 +1,44 @@
 import React from 'react'
-import {BsThreeDotsVertical} from 'react-icons/bs'
-import Graph1 from '../Images/card-chart.svg'
+import {BsDot, BsThreeDotsVertical} from 'react-icons/bs'
+import DashboardCard04 from '../../../partials/dashboard/DashboardCard04'
 
 const UserPerformance = () => {
+    const datasets = [
+        {
+          label: 'Direct',
+          data: [
+            800, 1600, 900, 1300, 1950, 1700,
+          ],
+          backgroundColor:'#5465FF',
+          barPercentage: 0.66,
+          categoryPercentage: 0.66,
+        },
+        {
+          label: 'Indirect',
+          data: [
+            4900, 2600, 5350, 4800, 5200, 4800,
+          ],
+          backgroundColor: '#5465FF',
+          barPercentage: 0.66,
+          categoryPercentage: 0.66,
+        },
+      ]
+
+
+
+
   return (
     <div className='user-top-outer'>
         <div className="user-top flex justify-between gap-x-10">
 
             <div className="user-top-chart w-4/6">
-                <img src={Graph1} className='w-full' alt='users-graph'/>
+                <h3 className='py-7 text-black text-lg font-medium text-center'>Users performance</h3>
+                <DashboardCard04 datasets={datasets}/>
+                <div className='flex items-center justify-center'>
+                    <BsDot size={35} className='text-[#5465FF]'/>
+                    <h5 className='text-sm font-normal text-black'>Sales</h5>
+                </div>
+
             </div>
 
 

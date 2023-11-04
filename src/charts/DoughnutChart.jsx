@@ -33,9 +33,6 @@ function DoughnutChart({
       data: data,
       options: {
         cutout: '80%',
-        layout: {
-          padding: 24,
-        },
         plugins: {
           legend: {
             display: false,
@@ -127,12 +124,9 @@ function DoughnutChart({
   }, [currentTheme]);
 
   return (
-    <div className="grow flex flex-col justify-center">
+    <div >
       <div>
         <canvas ref={canvas} width={width} height={height}></canvas>
-      </div>
-      <div className="px-5 pt-2 pb-6">
-        <ul ref={legend} className="flex flex-wrap justify-center -m-1"></ul>
       </div>
     </div>
   );

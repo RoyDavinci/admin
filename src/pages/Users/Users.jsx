@@ -16,11 +16,11 @@ const Users = ({ sidebarOpen,setSidebarOpen}) => {
             <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
             <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden bg-[#FCFCFC]">
-                <Header/>
+                <Header page={"Users"}/>
                 <div className="w-full space-y-10">    
                     <UserPerformance/>
                     <UserReadings/>
-                    <UsersInfo Info={'Report'}/>
+                    <UsersInfo Info={'Logged Users'}/>
                 </div>
                 
             </div>

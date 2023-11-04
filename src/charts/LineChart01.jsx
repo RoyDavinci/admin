@@ -34,9 +34,6 @@ function LineChart01({
         chartArea: {
           backgroundColor: darkMode ? chartAreaBg.dark : chartAreaBg.light,
         },
-        layout: {
-          padding: 20,
-        },
         scales: {
           y: {
             display: false,
@@ -57,9 +54,9 @@ function LineChart01({
               title: () => false, // Disable tooltip title
               label: (context) => formatValue(context.parsed.y),
             },
-            bodyColor: darkMode ? tooltipBodyColor.dark : tooltipBodyColor.light,
-            backgroundColor: darkMode ? tooltipBgColor.dark : tooltipBgColor.light,
-            borderColor: darkMode ? tooltipBorderColor.dark : tooltipBorderColor.light,
+            // bodyColor: darkMode ? tooltipBodyColor.dark : tooltipBodyColor.light,
+            // backgroundColor: darkMode ? tooltipBgColor.dark : tooltipBgColor.light,
+            // borderColor: darkMode ? tooltipBorderColor.dark : tooltipBorderColor.light,
           },
           legend: {
             display: false,
