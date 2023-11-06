@@ -5,24 +5,36 @@ export const ApiDataContext = createContext(null);
 
 
 const DataContext = ({children}) => {
-    const [count, setCount] = useState([{
-        success: "Status counts retrieved",
-        data: {
-            panicCount: 6,
-            dangerCount: 6,
-            safeCount: 91
-        }
-    }]);
+    const [count, setCount] = useState([]);
+    const [report, setReport] = useState([]);
 
-    useLayoutEffect(()=>{
-        fetch('https://us-central1-snapp-api-6df70.cloudfunctions.net/api/admin/status-counts')
-        .then(response=> response.json())
-        .then(data => setCount(data))
-        .catch(err => console.log(err))
+    useEffect(()=>{
+        setTimeout(() => {
+            fetch('https://us-central1-snapp-api-6df70.cloudfunctions.net/api/admin/status-counts')
+            .then(response=> response.json())
+            .then(data => setCount(data))
+            .catch(err => console.log(err))
+
+            fetch('https://us-central1-snapp-api-6df70.cloudfunctions.net/api/admin/reports')
+            .then(response=> response.json())
+            .then(data => setReport(data))
+            .catch(err => console.log(err))
+        },500)
         
     }, [])
+
+    // useEffect(()=>{
+    //     setTimeout(() => {
+    //         fetch('https://us-central1-snapp-api-6df70.cloudfunctions.net/api/admin/reports')
+    //         .then(response=> response.json())
+    //         .then(data => setReport(data))
+    //         .catch(err => console.log(err))
+    //     },500)
+        
+    // }, [])
+
   return (
-    <ApiDataContext.Provider value={{count}}>
+    <ApiDataContext.Provider value={{count, report}}>
         {children}
     </ApiDataContext.Provider>
   )

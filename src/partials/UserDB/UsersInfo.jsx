@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {BsFillCaretDownFill,BsSearch,BsThreeDotsVertical} from 'react-icons/bs'
 import {PiCaretUpDownFill} from 'react-icons/pi'
 import {IoMdRefresh} from 'react-icons/io'
 import DatePicker from 'react-flatpickr'
+import { ApiDataContext } from '../../Contexts/DataContext'
 
 const UsersInfo = ({Info}) => {
+    const {report} = useContext(ApiDataContext)
     const [check, setCheck] = useState(false)
+
 
     const handleChange =(e)=>{
         setCheck(!check)
     }
+
+    console.log(report)
 
   return (
     <div className='users-info-outer pb-14'>
@@ -66,20 +71,23 @@ const UsersInfo = ({Info}) => {
                 
 
                 <div className="details-inner min-w-[85rem] text-[#333] text-base font-normal">
-                    <div className=' h-12 flex items-center justify-between gap-x-5 w-full'>
+                    {report && report.reports &&
+                        report.reports.map((e, index) =>(
+                                <div className=' h-12 flex items-center justify-between gap-x-5 w-full' key={index}>
 
-                        <div className='flex justify-center items-center w-[10%]'>
-                            <input type="checkbox" name="" id="" className='accent-black border-black outline-none' onChange={handleChange} checked={check}/>
-                        </div>
+                                    <div className='flex justify-center items-center w-[10%]'>
+                                        <input type="checkbox" name="" id="" className='accent-black border-black outline-none' onChange={handleChange} checked={check}/>
+                                    </div>
 
-                        <div className='flex justify-start w-full items-center gap-x-10'>
-                            <h4 className='user-dt-style'>QRS33TY</h4>
-                            <h4 className='user-dt-style'>EA517DF</h4>
-                            <h4 className='min-w-[17rem] max-w-[17rem] '> Ghost Guest</h4>
-                            <h4 className='user-dt-style'>Ikeja town h...</h4>
-                            <h4 className='user-dt-style'>Fighting</h4>
-                        </div>
-                    </div>
+                                    <div className='flex justify-start w-full items-center gap-x-10 !max-h-full'>
+                                        <h4 className='user-dt-style '>{e.userID}</h4>
+                                        <h4 className='user-dt-style'>EA517DF</h4>
+                                        <h4 className='min-w-[17rem] max-w-[17rem] capitalize overflow-x-auto no-scrollbar '> {e.user.firstName +' '+ e.user.lastName}</h4>
+                                        <h4 className='user-dt-style '>{e.location.address}</h4>
+                                        <h4 className='user-dt-style'>{e.category}</h4>
+                                    </div>
+                                </div>
+                    ))}
 
                     <div className=' h-12 flex items-center justify-between gap-x-5 w-full'>
 

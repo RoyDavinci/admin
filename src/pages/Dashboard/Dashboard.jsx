@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Sidebar from '../../partials/Sidebar';
 import Header from '../../partials/Header';
 import {BsThreeDotsVertical,BsFillArrowUpCircleFill} from 'react-icons/bs';
@@ -11,59 +11,79 @@ import { ApiDataContext } from '../../Contexts/DataContext';
 function Dashboard() {
   const {count} = useContext(ApiDataContext);
   const [level, setLevel] = useState('Safe');
-  const modeCount = count.data;
+  const [DbInfo, setDbInfo] = useState([])
+  const [datasets, setDatasets] = useState([])
+  const barColor = useRef(null)
+  var totalCount;
   
-  const DbInfo =[
-    {
-      name:'Total Report',
-      value:3500,
-      // value: modeCount.dangerCount + modeCount.panicCount + modeCount.safeCount,
-      color:'#6C5DD3',
-      repValues:[3500],
-    },
-    {
-      name:'Safe',
-      value:2550,
-      color:['#51D323','#E4E8EF'],
-      repValues:[2550,3500],
-    },
-    {
-      name:'Panic',
-      value:938,
-      color:['#FF7B00', '#E4E8EF'],
-      repValues:[938,3500],
-    },
-    {
-      name:'Danger',
-      value:12,
-      color:['#E22A26', '#E4E8EF'],
-      repValues:[12,3500],
-    },
-  
-  ]
-  
-    const datasets= [
-      {
-        label: 'Direct',
-        data: [
-          800, 1600, 900, 1300, 1950, 1700,
-        ],
-        backgroundColor:'#51D323',
-        barPercentage: 0.66,
-        categoryPercentage: 0.66,
-      },
-      {
-        label: 'Indirect',
-        data: [
-          4900, 2600, 5350, 4800, 5200, 4800,
-        ],
-        backgroundColor: '#51D323',
-        barPercentage: 0.66,
-        categoryPercentage: 0.66,
-      },
-    ]
-   
-  
+
+  if (level === 'Safe'){
+    barColor.current = '#51D323';
+  }else if(level === 'Panic' ){
+    barColor.current = '#FF7B00';
+  }else{
+    barColor.current = '#E22A26';
+  };
+
+  useEffect(() => {
+
+    setTimeout(() => {
+      totalCount = count.data.dangerCount + count.data.panicCount + count.data.safeCount;
+      setDbInfo([
+        {
+          name:'Total Report',
+          value: totalCount,
+          color:'#6C5DD3',
+          repValues:[totalCount],
+        },
+        {
+          name:'Safe',
+          value:count.data.safeCount,
+          color:['#51D323','#E4E8EF'],
+          repValues:[count.data.safeCount,totalCount],
+        },
+        {
+          name:'Panic',
+          value:count.data.panicCount,
+          color:['#FF7B00', '#E4E8EF'],
+          repValues:[count.data.dangerCount,totalCount],
+        },
+        {
+          name:'Danger',
+          value:count.data.dangerCount,
+          color:['#E22A26', '#E4E8EF'],
+          repValues:[count.data.dangerCount.safeCount,totalCount],
+        },
+      
+      ])
+    }, 100)
+
+  }, [count])
+
+
+  useEffect(() => {
+    
+      setDatasets([
+        {
+          label: 'Direct',
+          data: [
+            800, 1600, 900, 1300, 1950, 1700,
+          ],
+          backgroundColor: barColor.current,
+          barPercentage: 0.66,
+          categoryPercentage: 0.66,
+        },
+        {
+          label: 'Indirect',
+          data: [
+            4900, 2600, 5350, 4800, 5200, 4800,
+          ],
+          backgroundColor:  barColor.current,
+          barPercentage: 0.66,
+          categoryPercentage: 0.66,
+        },
+      ])
+  }, [level]) 
 
 
 
@@ -85,8 +105,8 @@ function Dashboard() {
 
 
             <div className="db-info-top">
-              <div className='flex justify-between  '>
-                {DbInfo.map((info,index)=>(
+              <div className='flex justify-between  transition-all ease-in duration-300'>
+                {count && count.length !== 0 && (DbInfo.map((info,index)=>(
                   <div className="info-box flex justify-between items-center bg-[#FCFCFC] p-4 w-[23%] rounded-md" key={index}>
                     <div className="info space-y-1">
                       <h5 className='text-sm font-normal text-[#808191]'>{info.name}</h5>
@@ -97,7 +117,7 @@ function Dashboard() {
                       <DashboardCard06 color={info.color} repValues={info.repValues} label={info.name} height={70}/>
                     </div>
                   </div>
-                ))}
+                )))}
               </div>
             </div>
 
@@ -128,7 +148,7 @@ function Dashboard() {
                 </div>
 
                 <div className="bar-chart py-7">
-                  <DashboardCard04 datasets={datasets}/>
+                  {datasets.length !== 0 && (<DashboardCard04 datasets={datasets}/>)}
                 </div>
               </div>
 
