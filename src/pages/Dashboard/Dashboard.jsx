@@ -28,7 +28,7 @@ function Dashboard() {
   useEffect(() => {
 
     setTimeout(() => {
-      totalCount = count.data.dangerCount + count.data.panicCount + count.data.safeCount;
+      totalCount = count.data?.dangerCount + count.data?.panicCount + count.data?.safeCount;
       setDbInfo([
         {
           name:'Total Report',
@@ -38,21 +38,21 @@ function Dashboard() {
         },
         {
           name:'Safe',
-          value:count.data.safeCount,
+          value:count.data?.safeCount,
           color:['#51D323','#E4E8EF'],
-          repValues:[count.data.safeCount,totalCount],
+          repValues:[count.data?.safeCount,totalCount],
         },
         {
           name:'Panic',
-          value:count.data.panicCount,
+          value:count.data?.panicCount,
           color:['#FF7B00', '#E4E8EF'],
-          repValues:[count.data.dangerCount,totalCount],
+          repValues:[count.data?.dangerCount,totalCount],
         },
         {
           name:'Danger',
-          value:count.data.dangerCount,
+          value:count.data?.dangerCount,
           color:['#E22A26', '#E4E8EF'],
-          repValues:[count.data.dangerCount.safeCount,totalCount],
+          repValues:[count.data?.dangerCount.safeCount,totalCount],
         },
       
       ])
