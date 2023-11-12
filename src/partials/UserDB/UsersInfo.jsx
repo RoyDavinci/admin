@@ -14,7 +14,6 @@ const UsersInfo = ({Info}) => {
         setCheck(!check)
     }
 
-    console.log(report)
 
   return (
     <div className='users-info-outer pb-14'>
@@ -82,7 +81,7 @@ const UsersInfo = ({Info}) => {
                                     <div className='flex justify-start w-full items-center gap-x-10 !max-h-full'>
                                         <h4 className='user-dt-style '>{e.userID}</h4>
                                         <h4 className='user-dt-style'>EA517DF</h4>
-                                        <h4 className='min-w-[17rem] max-w-[17rem] capitalize overflow-x-auto no-scrollbar '> {e.user.firstName +' '+ e.user.lastName}</h4>
+                                        <h4 className='min-w-[17rem] max-w-[17rem] capitalize overflow-x-auto no-scrollbar '> {e.user?.firstName +' '+ e.user?.lastName}</h4>
                                         <h4 className='user-dt-style '>{e.location.address}</h4>
                                         <h4 className='user-dt-style'>{e.category}</h4>
                                     </div>

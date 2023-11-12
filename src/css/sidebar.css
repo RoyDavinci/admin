@@ -1,5 +1,6 @@
 .sn-ListItem {
-    background: rgba(226, 225, 225, 0.623);
+  background: rgb(219, 219, 219);
+  
     margin: 10px 10px;
   }
   
@@ -8,7 +9,7 @@
     color: white;
   }  
   .sn-SubList{
-    background: rgb(214, 213, 213);
+    background: rgb(224, 221, 221);
     padding: 8px 10px;
     border-radius: 5px;
   
