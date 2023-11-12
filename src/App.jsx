@@ -18,6 +18,7 @@ import Sales from './pages/Finances/Sales';
 import Reports from './pages/Reports';
 import SideBContext from './Contexts/SideBContext';
 import DataContext from './Contexts/DataContext';
+import UsersContext from './Contexts/UsersContext';
 
 
 
@@ -34,6 +35,8 @@ function App() {
 
   return (
     <DataContext>
+      <UsersContext>
+
       <SideBContext>
         <>
           <Routes>
@@ -46,6 +49,7 @@ function App() {
           </Routes>
         </>
       </SideBContext>
+      </UsersContext>
     </DataContext>
   );
 }

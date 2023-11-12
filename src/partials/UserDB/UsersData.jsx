@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import UsersContext from '../../Contexts/UsersContext';
 
 const UsersData = ({Info}) => {
     const [check, setCheck] = useState(false)
+    const{ usersData } = useContext(UsersContext)
 
     const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
+  { field: 'profilePhoto', headerName: 'Profile Pic', width: 150 },
   {
     field: 'firstName',
     headerName: 'First name',
@@ -20,10 +23,17 @@ const UsersData = ({Info}) => {
     editable: true,
   },
   {
-    field: 'age',
-    headerName: 'Age',
+    field: 'phoneNumber',
+    headerName: 'Phone Number',
     type: 'number',
-    width: 110,
+    width: 120,
+    editable: true,
+  },
+  {
+    field: 'email',
+    headerName: 'Email',
+    type: 'number',
+    width: 120,
     editable: true,
   },
   {
@@ -34,6 +44,14 @@ const UsersData = ({Info}) => {
     width: 160,
     valueGetter: (params) =>
       `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  },
+
+  {
+    field: 'safetyStatus',
+    headerName: 'Safety Status',
+    // description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    width: 120,
   },
 ];
     const rows = [
@@ -53,16 +71,16 @@ const UsersData = ({Info}) => {
       <Box sx={{ height: 400, width: '90%' }}>
         <h2 style={{margin: 10}}>Users Information</h2>
       <DataGrid
-        rows={rows}
+        rows={usersData}
         columns={columns}
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 10,
             },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[10, 20, 50]}
         checkboxSelection
         disableRowSelectionOnClick
       />

@@ -7,9 +7,10 @@ export const ApiDataContext = createContext(null);
 const DataContext = ({children}) => {
     const [count, setCount] = useState([]);
     const [report, setReport] = useState([]);
+    
 
     useEffect(()=>{
-        setTimeout(() => {
+        const Timer = setTimeout(() => {
             fetch('https://us-central1-snapp-api-6df70.cloudfunctions.net/api/admin/status-counts')
             .then(response=> response.json())
             .then(data => setCount(data))
@@ -19,8 +20,9 @@ const DataContext = ({children}) => {
             .then(response=> response.json())
             .then(data => setReport(data))
             .catch(err => console.log(err))
-        },500)
-        
+        },500);
+
+        return () => clearTimeout(Timer)
     }, [])
 
     // useEffect(()=>{
