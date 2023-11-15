@@ -3,16 +3,16 @@ import { useThemeProvider } from '../utils/ThemeContext';
 
 import { chartColors } from './ChartjsConfig';
 import {
-  Chart, DoughnutController, ArcElement, TimeScale, Tooltip,
+  Chart, PieController, ArcElement, TimeScale, Tooltip,
 } from 'chart.js';
 import 'chartjs-adapter-moment';
 
 // Import utilities
 import { tailwindConfig } from '../utils/Utils';
 
-Chart.register(DoughnutController, ArcElement, TimeScale, Tooltip);
+Chart.register(PieController, ArcElement, TimeScale, Tooltip);
 
-function DoughnutChart({
+function PieChart({
   data,
   width,
   height
@@ -29,13 +29,15 @@ function DoughnutChart({
     const ctx = canvas.current;
     // eslint-disable-next-line no-unused-vars
     const newChart = new Chart(ctx, {
-      type: 'doughnut',
+      type: 'pie',
       data: data,
       options: {
+        responsive: true,
         cutout: '80%',
         plugins: {
           legend: {
             display: true,
+            position: 'right',
           },
           tooltip: {
             titleColor: darkMode ? tooltipTitleColor.dark : tooltipTitleColor.light,
@@ -132,4 +134,4 @@ function DoughnutChart({
   );
 }
 
-export default DoughnutChart;
+export default PieChart;
