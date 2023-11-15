@@ -19,6 +19,7 @@ import Reports from './pages/Reports';
 import SideBContext from './Contexts/SideBContext';
 import DataContext from './Contexts/DataContext';
 import UsersContext from './Contexts/UsersContext';
+import UsersCounter, { UsersCountContext } from './Contexts/UsersCountContext';
 
 
 
@@ -36,7 +37,7 @@ function App() {
   return (
     <DataContext>
       <UsersContext>
-
+      <UsersCounter>
       <SideBContext>
         <>
           <Routes>
@@ -49,6 +50,7 @@ function App() {
           </Routes>
         </>
       </SideBContext>
+      </UsersCounter>
       </UsersContext>
     </DataContext>
   );

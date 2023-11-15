@@ -3,7 +3,11 @@ import { create } from "apisauce";
 
 const api = create({
     baseURL: "https://us-central1-snapp-api-6df70.cloudfunctions.net/api",
-      headers: { Accept: 'application/json' },
+      headers: { 
+        Accept: 'application/json',
+        // 'Access-Control-Allow-Origin': '*',
+    
+    },
   });
 
 

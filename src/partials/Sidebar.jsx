@@ -108,7 +108,7 @@ function Sidebar() {
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
-                      <a
+                      <div
                         href="#0"
                         className={`px-3 py-4 text-slate-600 rounded bg-black block  truncate transition duration-150 ${
                           pathname.includes("dashboard")
@@ -156,7 +156,7 @@ function Sidebar() {
                             </svg>
                           </div>
                         </div>
-                      </a>
+                      </div>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`px-5 mt-2 ${!open && "hidden"}`}>
                         <li className="mb-1 last:mb-0 sn-SubList">
@@ -333,7 +333,7 @@ function Sidebar() {
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
-                      <a
+                      <div
                         href="#0"
                         className={`px-3 py-3 text-slate-600 rounded bg-[#e8e8ea] block  truncate transition duration-150 ${
                           pathname.includes("finance")
@@ -374,7 +374,7 @@ function Sidebar() {
                             </svg>
                           </div>
                         </div>
-                      </a>
+                      </div>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`px-5 mt-2  ${!open && "hidden"}`}>
                           <li className="mb-1 last:mb-0 sn-SubList">
@@ -487,15 +487,15 @@ function Sidebar() {
                       d="M20 19V10.5C20 10.1852 19.8518 9.88885 19.6 9.7L12.6 4.45C12.2444 4.18333 11.7556 4.18333 11.4 4.45L4.4
                            9.7C4.14819 9.88885 4 10.1852 4 10.5V19C4 19.5523 4.44772 20 5 20H19C19.5523 20 20 19.5523 20 19Z"
                       stroke="currentColor"
-                      strokeLineCap="round"
-                      strokeLineJoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       strokeWidth="2"
                     />
                     <path
                       d="M8 13V16M12 10V16M16 15V16"
                       stroke="currentColor"
-                      strokeLineCap="round"
-                      strokeLineJoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       strokeWidth="2"
                     />
                   </svg>
@@ -560,7 +560,7 @@ function Sidebar() {
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
-                      <a
+                      <div
                         href="#0"
                         className={`block text-slate-200 truncate transition duration-150 ${
                           pathname.includes("component")
@@ -617,7 +617,7 @@ function Sidebar() {
                             </svg>
                           </div>
                         </div>
-                      </a>
+                      </div>
                       <div className="lg:hidden lg:sidebar-expanded:block 2xl:block">
                         <ul className={`pl-9 mt-1 ${!open && "hidden"}`}>
                           <li className="mb-1 last:mb-0">

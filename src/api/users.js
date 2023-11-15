@@ -24,7 +24,7 @@ const api = create({
   //Get number of users accounts
   export const GetUsersCount = async () => {
     try {
-      const result = await api.get("/admin/user-count");
+      const result = await api.get("/admin/user/user-count");
       return result;
     } catch (error) {
       return error;
