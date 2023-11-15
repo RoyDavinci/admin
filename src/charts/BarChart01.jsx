@@ -209,7 +209,7 @@ function BarChart01({
   }, [data]);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
 
   useEffect(() => {
     if (!chart) return;

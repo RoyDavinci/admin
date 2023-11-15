@@ -125,7 +125,7 @@ function Dashboard({sidebarOpen, setSidebarOpen}) {
       },
     ]
    
-
+  });
 
 
 
@@ -276,6 +276,8 @@ function Dashboard({sidebarOpen, setSidebarOpen}) {
   
 </div>
 
+
+</div>
 
 </div>
         </main>
