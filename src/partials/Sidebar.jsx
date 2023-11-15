@@ -108,14 +108,9 @@ function Sidebar() {
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
+                      
                       <div
-                        href="#0"
-                        className={`px-3 py-4 text-slate-600 rounded bg-black block  truncate transition duration-150 ${
-                          pathname.includes("dashboard")
-                            ? "hover:text-slate-200"
-                            : "text-white bg-black"}`}
-                      <a
-                        href="/"
+                      
                         className={`px-3 py-4 rounded block truncate transition duration-150 ${
                           pathname.includes("/")
                             ? "hover:bg-white hover:text-black hover:border hover:border-black bg-black text-white "
