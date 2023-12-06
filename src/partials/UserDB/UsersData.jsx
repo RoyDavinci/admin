@@ -7,6 +7,8 @@ import FadeLoader from "react-spinners/FadeLoader";
 import { GetAllUsers } from "../../api/users";
 import { ACTION_TYPES } from "../../reducers/actionTypes";
 import { Graph } from "../../components/Chart";
+import axios from "axios";
+import defaultUser from "../../images/abstract-user-flat-4.svg";
 
 const options = {
 	year: "numeric",
@@ -25,9 +27,13 @@ const UsersData = ({ Info }) => {
 		android: 0,
 		iOS: 0,
 	});
+	const [userState, setUserState] = useState(false);
 	const { state, dispatch } = useContext(UsersDataContext);
 	const [user, setUsers] = useState([]);
+	const [singleUserLoading, setSingleUserLoading] = useState(false);
 	const [lastLogin, setLastLogin] = useState([]);
+	// const history = useHistory();
+	const [singleUser, setSingleUser] = useState([]);
 	// const [loading, setLoading] = useState(true);
 	const { users, loading } = state;
 	console.log("user data: ", users);
@@ -39,6 +45,24 @@ const UsersData = ({ Info }) => {
 		maxHeight: "300px",
 		height: "auto", // Set your desired height
 		overflowY: "auto", // Enable vertical overflow with a scrollbar
+	};
+	const handleRowClick = async (selected) => {
+		// Update the path as needed
+		// history.push(`/yourpage/${selectedRow}`);
+		console.log(selected.id);
+		setUserState(!userState);
+		setSingleUserLoading(true);
+
+		try {
+			const { data } = await axios.get(
+				`https://us-central1-snapp-api-6df70.cloudfunctions.net/snapp-api/admin/dashboard/single-user/${selected.id}`
+			);
+			console.log(data);
+			setSingleUserLoading(false);
+			setSingleUser(data.user);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const columns = [
@@ -168,8 +192,8 @@ const UsersData = ({ Info }) => {
 	// console.log(graphDetails);
 
 	return (
-		<div className='users-info-outer  pb-14'>
-			{user.length <= 0 ? (
+		<div className='users-info-outer  pb-14 relative z-0'>
+			{loading ? (
 				<div className='flex justify-center items-center flex-col h-screen'>
 					<FadeLoader
 						loading={loading}
@@ -182,21 +206,22 @@ const UsersData = ({ Info }) => {
 			) : (
 				<>
 					{" "}
-					<div className='flex justify-between items-center '>
-						<Graph
-							unknown={graphDetails.itemWithout}
-							android={graphDetails.android}
-							ios={graphDetails.iOS}
-						/>
-						<div style={listStyle} className='shadow-2xl rounded-md p-2'>
+					<div className='flex justify-between items-center px-8'>
+						<Graph users={users} />
+						<div style={listStyle} className=' w-60 shadow-2xl rounded-md p-2'>
 							<h2 className='text-center font-bold'>Active Users</h2>
 							<ul>
-								{lastLogin.map((user) => (
-									<li key={user._id} className='font-bold py-4'>
-										{user.firstName} {user.lastName} -{" "}
-										{new Date(user.lastLogin).toLocaleString("en-US", options)}
-									</li>
-								))}
+								{users
+									.filter((user) => user.lastLogin)
+									.map((user) => (
+										<li key={user._id} className='font-bold py-4'>
+											{user.firstName} {user.lastName} -{" "}
+											{new Date(user.lastLogin).toLocaleString(
+												"en-US",
+												options
+											)}
+										</li>
+									))}
 							</ul>
 						</div>
 					</div>
@@ -216,9 +241,88 @@ const UsersData = ({ Info }) => {
 							pageSizeOptions={[10, 20, 50, 100]}
 							checkboxSelection
 							disableRowSelectionOnClick
+							// onSelectionModelChange={handleSelectionChange}
+							onRowClick={handleRowClick}
 						/>
 					</Box>
 				</>
+			)}
+			{userState ? (
+				<div className='z-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white shadow-xl w-96 h-80 overflow-y-auto no-scrollbar'>
+					{singleUserLoading ? (
+						<div className='flex justify-center items-center h-full'>
+							<FadeLoader
+								loading={singleUserLoading}
+								cssOverride={override}
+								size={500}
+								aria-label='Loading Spinner'
+								data-testid='loader'
+							/>
+						</div>
+					) : (
+						<div className='p-3'>
+							<p className='text-center'>User Details</p>
+							<div className='flex justify-center items-center text-center'>
+								<img
+									src={
+										singleUser.profilePhoto
+											? singleUser.profilePhoto
+											: defaultUser
+									}
+									alt=''
+									className='rounded-full w-20 h-20'
+								/>
+							</div>
+							<div className='flex justify-between items-center'>
+								<p className='text-[12px]'>
+									First Name: {singleUser.firstName}
+								</p>{" "}
+								<p className='text-[12px]'>Last Name: {singleUser.lastName}</p>
+							</div>
+							<div className='flex justify-between items-center my-2'>
+								<p className='text-[12px]'>Email: {singleUser.email}</p>{" "}
+								<p className='text-[12px]'>Phone: {singleUser.phoneNumber}</p>
+							</div>
+							<div>
+								{singleUser.safetyStatus && (
+									<p>Safety Status: {singleUser.safetyStatus}</p>
+								)}
+								<p>
+									Subscribed:{" "}
+									{singleUser.subscribed ? (
+										<span className='font-bold'>Yes</span>
+									) : (
+										<span className='font-bold'>No</span>
+									)}
+								</p>
+								<p>
+									Suspended:{" "}
+									{singleUser.suspended ? (
+										<span className='font-bold'>Yes</span>
+									) : (
+										<span className='font-bold'>No</span>
+									)}
+								</p>
+								{singleUser.recentLocations.length > 0 ? (
+									<p>
+										Most Recent Location :{" "}
+										<span className='font-bold'>
+											{
+												singleUser.recentLocations[
+													singleUser.recentLocations.length - 1
+												].address
+											}
+										</span>
+									</p>
+								) : (
+									""
+								)}
+							</div>
+						</div>
+					)}
+				</div>
+			) : (
+				""
 			)}
 		</div>
 	);

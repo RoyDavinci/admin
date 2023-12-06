@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "chart.js/auto";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const Graph = ({ unknown, ios, android }) => {
+export const Graph = ({ users }) => {
+	const [graphDetails, setGraphDetails] = useState({
+		itemWithout: 0,
+		android: 0,
+		iOS: 0,
+	});
+	const getDetails = () => {
+		const itemsWithoutDeviceOs = users.filter(
+			(item) => !item.deviceName
+		).length;
+
+		// Count of items with 'android' in the deviceName property
+		const androidCount = users.filter(
+			(item) => item.deviceName && item.deviceName.toLowerCase() === "android"
+		).length;
+
+		// Count of items with 'ios' in the deviceName property
+		const iosCount = users.filter(
+			(item) => item.deviceName && item.deviceName.toLowerCase() === "ios"
+		).length;
+		setGraphDetails({
+			iOS: iosCount,
+			android: androidCount,
+			itemWithout: itemsWithoutDeviceOs,
+		});
+	};
 	const labels = ["ios", "unknown", "android"];
 
 	const data = {
@@ -12,7 +37,7 @@ export const Graph = ({ unknown, ios, android }) => {
 		datasets: [
 			{
 				label: "User Device Detsils",
-				data: [ios, unknown, android],
+				data: [graphDetails.ios, graphDetails.unknown, graphDetails.android],
 				backgroundColor: [
 					"rgba(255, 99, 132, 0.2)",
 					"rgba(255, 206, 86, 0.2)",
@@ -27,6 +52,10 @@ export const Graph = ({ unknown, ios, android }) => {
 			},
 		],
 	};
+
+	useEffect(() => {
+		getDetails();
+	}, [users]);
 
 	return (
 		<div className='text-center'>
