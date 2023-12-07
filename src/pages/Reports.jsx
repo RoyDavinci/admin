@@ -8,6 +8,7 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import moment from "moment";
 import FadeLoader from "react-spinners/FadeLoader";
+import defaultUser from "../images/abstract-user-flat-4.svg";
 
 const override = {
 	display: "block",
@@ -20,6 +21,27 @@ const Reports = () => {
 	const [reportState, setReportState] = useState(false);
 	const [singleReportLoading, setSingleReportLoading] = useState(false);
 	const [singleReport, setSingleReport] = useState([]);
+
+	const contentTodisplay = (value) => {
+		if (value[0]) {
+			const data = value[0].split(".");
+			if (data[data.length - 1].includes("mp")) {
+				return (
+					<div>
+						<video src={value[0]}></video>
+					</div>
+				);
+			} else if (data.length > 1) {
+				return (
+					<div>
+						<img src={value[0]} alt='' />
+					</div>
+				);
+			}
+			return <div></div>;
+		}
+	};
+
 	const columns = [
 		{
 			field: "assets",
@@ -27,10 +49,15 @@ const Reports = () => {
 			width: 70,
 			height: 70,
 			renderCell: (params) => {
+				const data = params.value[0] ? params?.value[0]?.split(".") : "";
 				return (
 					<>
 						<img
-							src={params.value[0]}
+							src={
+								data === "" || data[data.length - 1].includes("mp")
+									? defaultUser
+									: params.value[0]
+							}
 							alt='image'
 							style={{
 								width: 50,
@@ -133,7 +160,13 @@ const Reports = () => {
 			);
 			console.log(data);
 			setLoading(false);
-			setReports(data.reports);
+			setReports(
+				data.reports.sort((a, b) => {
+					const dateA = new Date(a.createdAt);
+					const dateB = new Date(b.createdAt);
+					return dateB - dateA;
+				})
+			);
 		} catch (error) {
 			console.log(error);
 		}
@@ -240,6 +273,10 @@ const Reports = () => {
 										{singleReport.location.address}
 									</span>
 								</p>
+								<div>
+									<p>Report</p>
+									<div>{contentTodisplay(singleReport.assets)}</div>
+								</div>
 							</div>
 						</div>
 					)}

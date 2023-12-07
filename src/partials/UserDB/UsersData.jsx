@@ -75,7 +75,7 @@ const UsersData = ({ Info }) => {
 				return (
 					<>
 						<img
-							src={params.value}
+							src={params.value ? params.value : defaultUser}
 							alt='image'
 							style={{
 								width: 50,
