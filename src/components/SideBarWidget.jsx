@@ -14,13 +14,15 @@ const SideBarWidget = () => {
 			);
 			setUsers(data.data);
 			const distressedUser = users.filter(
-				(user) => user.safetyStatus.tolowerCase() !== "safe"
+				(user) => user.safetyStatus.toLowerCase() !== "safe"
 			);
 			setDistressedUsers(distressedUser);
 		} catch (error) {
 			console.log(error);
 		}
 	};
+
+	// console.log(users);
 
 	useEffect(() => {
 		getUsers();
