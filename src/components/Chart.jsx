@@ -11,6 +11,7 @@ export const Graph = ({ users }) => {
 		iOS: 0,
 	});
 	const getDetails = () => {
+		console.log(users);
 		const itemsWithoutDeviceOs = users.filter(
 			(item) => !item.deviceName
 		).length;
@@ -30,6 +31,8 @@ export const Graph = ({ users }) => {
 			itemWithout: itemsWithoutDeviceOs,
 		});
 	};
+
+	console.log(graphDetails);
 	const labels = ["ios", "unknown", "android"];
 
 	const data = {
@@ -37,7 +40,11 @@ export const Graph = ({ users }) => {
 		datasets: [
 			{
 				label: "User Device Detsils",
-				data: [graphDetails.ios, graphDetails.unknown, graphDetails.android],
+				data: [
+					graphDetails.iOS,
+					graphDetails.itemWithout,
+					graphDetails.android,
+				],
 				backgroundColor: [
 					"rgba(255, 99, 132, 0.2)",
 					"rgba(255, 206, 86, 0.2)",
