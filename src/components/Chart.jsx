@@ -62,8 +62,8 @@ export const Graph = ({ users }) => {
 			<h4>User By Device</h4>
 			<Doughnut
 				data={data}
-				width={"30%"}
-				height={"30%"}
+				// width={"40%"}
+				// height={"40%"}
 				// options={{ maintainAspectRatio: false }}
 			/>
 		</div>
