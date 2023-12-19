@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UsersDataContext } from "../Contexts/UsersContext";
 import axios from "axios";
+import defaultUser from "../images/abstract-user-flat-4.svg";
 
 const SideBarWidget = () => {
 	// const { state } = useContext(UsersDataContext);
@@ -31,10 +32,13 @@ const SideBarWidget = () => {
 	return (
 		<>
 			{distressedUsers.map((user) => (
-				<div className='users-outer flex gap-x-3 items-center' key={user._id}>
+				<div
+					className='users-outer flex gap-x-3 items-center my-2'
+					key={user._id}
+				>
 					<img
 						className='users-image h-12 w-12 rounded-lg bg-black flex justify-center items-center'
-						src={user.profilePhoto}
+						src={user.profilePhoto ? user.profilePhoto : defaultUser}
 					/>
 					<div className='users-info space-y-1'>
 						<h4 className='text-sm font-medium text-[#11142D]'>
