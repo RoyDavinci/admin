@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { sideBarContext } from "../Contexts/SideBContext";
 import "../css/sidebar.css";
 import SidebarLinkGroup from "./SidebarLinkGroup";
+import { useAuth } from "../Contexts/AuthContext";
 
 function Sidebar() {
 	const { sidebarOpen, setSidebarOpen } = useContext(sideBarContext);
+	const { state, logout } = useAuth();
+	console.log(state);
 
 	const location = useLocation();
 	const { pathname } = location;
@@ -17,6 +20,8 @@ function Sidebar() {
 	const [sidebarExpanded, setSidebarExpanded] = useState(
 		storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
 	);
+
+	const navigate = useNavigate();
 
 	// close on click outside
 	useEffect(() => {
@@ -52,6 +57,14 @@ function Sidebar() {
 			document.querySelector("body").classList.remove("sidebar-expanded");
 		}
 	}, [sidebarExpanded]);
+
+	useEffect(() => {
+		if (state.isAuthenticated) {
+			return;
+		} else {
+			navigate("/login");
+		}
+	}, [state]);
 
 	return (
 		<div>
@@ -121,8 +134,8 @@ function Sidebar() {
 												}}
 											>
 												{/*Dashboard*/}
-												<div className='flex items-center justify-between'>
-													<NavLink to='/'>
+												<NavLink to='/'>
+													<div className='flex items-center justify-between'>
 														<div className='flex items-center'>
 															<svg
 																xmlns='http://www.w3.org/2000/svg'
@@ -142,188 +155,8 @@ function Sidebar() {
 																Dashboard
 															</span>
 														</div>
-													</NavLink>
-													{/* Icon */}
-													<div className='flex shrink-0 ml-2'>
-														<svg
-															className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${
-																open && "rotate-180"
-															}`}
-															viewBox='0 0 12 12'
-														>
-															<path d='M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z' />
-														</svg>
 													</div>
-												</div>
-											</div>
-											<div className='lg:hidden lg:sidebar-expanded:block 2xl:block'>
-												<ul className={`px-5 mt-2 ${!open && "hidden"}`}>
-													<li className='mb-1 last:mb-0 sn-SubList'>
-														<NavLink
-															end
-															to='/status-list'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-black bg-white border-black"
-																	: "text-slate-500 hover:text-black flex")
-															}
-														>
-															<svg
-																xmlns='http://www.w3.org/2000/svg'
-																fill='none'
-																viewBox='0 0 24 24'
-																strokeWidth='1.5'
-																stroke='currentColor'
-																height='1.5em'
-																width='1.5em'
-																className='ml-2 mr-3'
-															>
-																<path
-																	strokeLinecap='round'
-																	strokeLinejoin='round'
-																	d='M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z'
-																/>
-															</svg>
-															<span className=' font-normal lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 '>
-																Status chart
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0 sn-SubList'>
-														<NavLink
-															end
-															to='/status-list'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-black bg-white border-black"
-																	: "text-slate-500 hover:text-black flex")
-															}
-														>
-															<svg
-																xmlns='http://www.w3.org/2000/svg'
-																fill='none'
-																viewBox='0 0 24 24'
-																strokeWidth={1.5}
-																stroke='currentColor'
-																height='1.5em'
-																width='1.5em'
-																className='ml-2 mr-3'
-															>
-																<path
-																	strokeLinecap='round'
-																	strokeLinejoin='round'
-																	d='M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z'
-																/>
-															</svg>
-															<span className=' font-normal lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 '>
-																Status list
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0 sn-SubList'>
-														<NavLink
-															end
-															to='/status-graph'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-black bg-white border-black"
-																	: "text-slate-500 hover:text-black flex")
-															}
-														>
-															<svg
-																viewBox='0 0 24 24'
-																fill='currentColor'
-																height='1.5em'
-																width='1.5em'
-																className='ml-2 mr-3'
-															>
-																<path d='M2.5 2.75a.75.75 0 00-1.5 0v18.5c0 .414.336.75.75.75H20a.75.75 0 000-1.5H2.5V2.75z' />
-																<path d='M22.28 7.78a.75.75 0 00-1.06-1.06l-5.72 5.72-3.72-3.72a.75.75 0 00-1.06 0l-6 6a.75.75 0 101.06 1.06l5.47-5.47 3.72 3.72a.75.75 0 001.06 0l6.25-6.25z' />
-															</svg>
-															<span className=' font-normal lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 '>
-																Status graph
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0 sn-SubList'>
-														<NavLink
-															end
-															to='/report-data'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-black bg-white border-black"
-																	: "text-slate-500 hover:text-black flex")
-															}
-														>
-															<svg
-																viewBox='0 0 21 21'
-																fill='currentColor'
-																height='25px'
-																width='25px'
-																className='ml-2 mr-3'
-															>
-																<g
-																	fill='none'
-																	fillRule='evenodd'
-																	stroke='currentColor'
-																	strokeLinecap='round'
-																	strokeLinejoin='round'
-																>
-																	<path d='M3.5 3.5v12a2 2 0 002 2H17M6.5 11.5v3M10.5 8.5v6M14.5 5.5v9' />
-																</g>
-															</svg>
-															<span className=' font-normal lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 '>
-																Report data
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0 sn-SubList'>
-														<NavLink
-															end
-															to='/perfomance'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-black bg-white border-black"
-																	: "text-slate-500 hover:text-black flex")
-															}
-														>
-															<svg
-																viewBox='0 0 512 512'
-																fill='currentColor'
-																height='1.5em'
-																width='1.5em'
-																className='ml-2 mr-3'
-															>
-																<path d='M326.1 231.9l-47.5 75.5a31 31 0 01-7 7 30.11 30.11 0 01-35-49l75.5-47.5a10.23 10.23 0 0111.7 0 10.06 10.06 0 012.3 14z' />
-																<path
-																	fill='none'
-																	stroke='currentColor'
-																	strokeLinecap='round'
-																	strokeLinejoin='round'
-																	strokeWidth={32}
-																	d='M256 64C132.3 64 32 164.2 32 287.9a223.18 223.18 0 0056.3 148.5c1.1 1.2 2.1 2.4 3.2 3.5a25.19 25.19 0 0037.1-.1 173.13 173.13 0 01254.8 0 25.19 25.19 0 0037.1.1l3.2-3.5A223.18 223.18 0 00480 287.9C480 164.2 379.7 64 256 64z'
-																/>
-																<path
-																	fill='none'
-																	stroke='currentColor'
-																	strokeLinecap='round'
-																	strokeMiterlimit={10}
-																	strokeWidth={32}
-																	d='M256 128v32M416 288h-32M128 288H96M165.49 197.49l-22.63-22.63M346.51 197.49l22.63-22.63'
-																/>
-															</svg>
-
-															<span className=' font-normal lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200 '>
-																Performance
-															</span>
-														</NavLink>
-													</li>
-												</ul>
+												</NavLink>
 											</div>
 										</React.Fragment>
 									);
@@ -560,304 +393,6 @@ function Sidebar() {
 							</li>
 						</ul>
 					</div>
-
-					{/* More group */}
-					<div>
-						<h3 className='text-xs uppercase text-slate-500 font-semibold pl-3'>
-							<span
-								className='hidden lg:block lg:sidebar-expanded:hidden 2xl:hidden text-center w-6'
-								aria-hidden='true'
-							>
-								•••
-							</span>
-							<span className='lg:hidden lg:sidebar-expanded:block 2xl:block'>
-								More
-							</span>
-						</h3>
-						<ul className='mt-3'>
-							{/* Components */}
-							<SidebarLinkGroup
-								activecondition={pathname.includes("component")}
-							>
-								{(handleClick, open) => {
-									return (
-										<React.Fragment>
-											<a
-												href='#0'
-												className={`block text-slate-200 truncate transition duration-150 ${
-													pathname.includes("component")
-														? "hover:text-slate-200"
-														: "hover:text-white"
-												}`}
-												onClick={(e) => {
-													e.preventDefault();
-													sidebarExpanded
-														? handleClick()
-														: setSidebarExpanded(true);
-												}}
-											>
-												<div className='flex items-center justify-between'>
-													<div className='flex items-center'>
-														<svg
-															className='shrink-0 h-6 w-6'
-															viewBox='0 0 24 24'
-														>
-															<circle
-																className={`fill-current ${
-																	pathname.includes("component")
-																		? "text-indigo-500"
-																		: "text-slate-600"
-																}`}
-																cx='16'
-																cy='8'
-																r='8'
-															/>
-															<circle
-																className={`fill-current ${
-																	pathname.includes("component")
-																		? "text-indigo-300"
-																		: "text-slate-400"
-																}`}
-																cx='8'
-																cy='16'
-																r='8'
-															/>
-														</svg>
-														<span className='text-sm font-medium ml-3 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-															Components
-														</span>
-													</div>
-													{/* Icon */}
-													<div className='flex shrink-0 ml-2'>
-														<svg
-															className={`w-3 h-3 shrink-0 ml-1 fill-current text-slate-400 ${
-																open && "rotate-180"
-															}`}
-															viewBox='0 0 12 12'
-														>
-															<path d='M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z' />
-														</svg>
-													</div>
-												</div>
-											</a>
-											<div className='lg:hidden lg:sidebar-expanded:block 2xl:block'>
-												<ul className={`pl-9 mt-1 ${!open && "hidden"}`}>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/button'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Button
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/form'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Input Form
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/dropdown'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Dropdown
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/alert'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Alert & Banner
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/modal'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Modal
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/pagination'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Pagination
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/tabs'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Tabs
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/breadcrumb'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Breadcrumb
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/badge'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Badge
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/avatar'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Avatar
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/tooltip'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Tooltip
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/accordion'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Accordion
-															</span>
-														</NavLink>
-													</li>
-													<li className='mb-1 last:mb-0'>
-														<NavLink
-															end
-															to='/component/icons'
-															className={({ isActive }) =>
-																"block transition duration-150 truncate " +
-																(isActive
-																	? "text-indigo-500"
-																	: "text-slate-400 hover:text-slate-200")
-															}
-														>
-															<span className='text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200'>
-																Icons
-															</span>
-														</NavLink>
-													</li>
-												</ul>
-											</div>
-										</React.Fragment>
-									);
-								}}
-							</SidebarLinkGroup>
-						</ul>
-					</div>
 				</div>
 
 				{/* Expand / collapse button */}
@@ -879,7 +414,12 @@ function Sidebar() {
 					</div>
 					<div className='w-1/3'>
 						<NavLink>
-							<p className='text-slate-800 mt-2 text-md'>Logout</p>
+							<span
+								onClick={() => logout()}
+								className='text-slate-800 mt-2 text-md'
+							>
+								Logout
+							</span>
 						</NavLink>
 					</div>
 				</div>

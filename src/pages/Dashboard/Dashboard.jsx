@@ -142,6 +142,11 @@ function Dashboard({ sidebarOpen, setSidebarOpen }) {
 			},
 		],
 	};
+	const listStyle = {
+		maxHeight: "300px",
+		height: "auto", // Set your desired height
+		overflowY: "auto", // Enable vertical overflow with a scrollbar
+	};
 
 	return (
 		<div className='flex h-screen overflow-hidden '>
@@ -172,10 +177,6 @@ function Dashboard({ sidebarOpen, setSidebarOpen }) {
 								<div className='bar-chart py-7'>
 									<DoughnutChart data={data} />
 								</div>
-
-								<div className='bar-chart py-7'>
-									<ReportCharts />
-								</div>
 							</div>
 
 							<div className=' px-10 space-y-7 w-[27%]'>
@@ -186,7 +187,10 @@ function Dashboard({ sidebarOpen, setSidebarOpen }) {
 									<BsThreeDotsVertical />
 								</div>
 
-								<div className=' space-y-5 h-90 max-h-90 overflow-y-auto no-scrollbar'>
+								<div
+									style={listStyle}
+									className=' space-y-5  overflow-y-auto no-scrollbar'
+								>
 									<SideBarWidget />
 								</div>
 							</div>

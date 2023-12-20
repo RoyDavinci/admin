@@ -9,6 +9,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import moment from "moment";
 import FadeLoader from "react-spinners/FadeLoader";
 import defaultUser from "../images/abstract-user-flat-4.svg";
+import ReportCharts from "../partials/reports/ReportCharts";
 
 const override = {
 	display: "block",
@@ -195,6 +196,9 @@ const Reports = () => {
 				) : (
 					<div className='w-full space-y-10 py-10'>
 						{/* <ReportData Info={"Reports"} /> */}
+						<div className='bar-chart py-7'>
+							<ReportCharts />
+						</div>
 						<Box sx={{ height: 400, width: "100%" }}>
 							<h2 style={{ margin: 10 }}>Latest Reports</h2>
 							<DataGrid

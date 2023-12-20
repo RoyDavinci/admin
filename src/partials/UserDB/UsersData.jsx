@@ -209,7 +209,10 @@ const UsersData = ({ Info }) => {
 					{" "}
 					<div className='flex justify-between items-center px-8'>
 						<Graph users={users} />
-						<div style={listStyle} className=' w-60 shadow-2xl rounded-md p-2'>
+						<div
+							style={listStyle}
+							className='no-scrollbar w-60 shadow-2xl rounded-md p-2'
+						>
 							<h4 className='text-center font-bold my-2'>Users in Distress</h4>
 							<SideBarWidget />
 						</div>
