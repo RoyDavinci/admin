@@ -13,8 +13,6 @@ const override = {
 export const Login = () => {
 	const { login, state } = useAuth();
 	const navigate = useNavigate();
-
-	console.log("token", state);
 	const [formData, setFormData] = useState({ email: "", password: "" });
 	const [error, setError] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -42,18 +40,6 @@ export const Login = () => {
 				setError("");
 				login();
 			}
-
-			// if (data.status) {
-			// 	localStorage.setItem("token", data.token);
-			// 	setError("");
-			// 	setLoginState(false);
-			// 	login();
-			// 	// console.log("token", state);
-
-			// 	// Login successful, redirect to the dashboard or set authentication state
-			// } else {
-			// 	setError(data.error);
-			// }
 		} catch (error) {
 			console.log(error.response.data);
 			setError(titleCase(error.response.data.message));
