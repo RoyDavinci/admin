@@ -48,3 +48,9 @@ export const SuspendUser = async (userId) => {
 };
 
 //NODE_MAJOR=20
+
+// select count(pk_ssml_logid), ssml_network_id  from smpp_sms_message_log WHERE
+//       ssml_calling_number = 'FidelitySMS'  and pk_ssml_log_time  between '2023-12-01 00:00:00' and '2023-12-01 23:59:59'
+//     and ssml_source=1 and ssml_direction=1  group by ssml_network_id;
+
+// SELECT COUNT(pk_ssml_logid) AS message_count, ssml_result, ssml_network_id FROM smpp_sms_message_log WHERE ssml_calling_number = 'FidelitySMS' AND pk_ssml_log_time >= '2023-12-01 00:00:00' AND pk_ssml_log_time <= '2023-12-01 23:59:59' and ssml_source=1 and ssml_direction=1 GROUP BY ssml_network_id, ssml_result;

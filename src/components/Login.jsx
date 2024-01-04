@@ -72,9 +72,9 @@ export const Login = () => {
 	}, [state]);
 	return (
 		<div>
-			<div className='min-h-screen flex items-center justify-center bg-gray-400'>
+			<div className='min-h-screen flex items-center justify-center bg-gray-400 p-4'>
 				<form
-					className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3'
+					className='bg-white shadow-md rounded px-8 pt-6 pb-8 lg:w-1/3 mb-4 w-full'
 					onSubmit={handleSubmit}
 				>
 					<h2 className='text-white text-2xl font-bold mb-4 text-center bg-[#D82418] py-2 rounded-t-lg'>
