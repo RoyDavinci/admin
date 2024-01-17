@@ -1,8 +1,12 @@
 import { create } from "apisauce";
+import axios from "axios";
 
-const api = create({
+const api = axios.create({
 	baseURL: "https://us-central1-snapp-api-6df70.cloudfunctions.net/api",
-	//   headers: { Accept: 'application/json' },
+	headers: {
+		Accept: "application/json",
+		// 'Access-Control-Allow-Origin': '*',
+	},
 });
 
 /* Admin Dashboard User Routes */
